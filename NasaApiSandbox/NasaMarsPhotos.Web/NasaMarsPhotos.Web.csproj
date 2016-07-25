@@ -213,12 +213,6 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NasaMarsPhotos.DataService\NasaMarsPhotos.DataService.csproj">
-      <Project>{7113bfe9-1dfa-416f-a457-01be180543ae}</Project>
-      <Name>NasaMarsPhotos.DataService</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
