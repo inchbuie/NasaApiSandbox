@@ -12,7 +12,7 @@ namespace NasaMarsPhotosDataService.UnitTests.QueryParameters_UnitTests
     public class ToStringUnitTests
     {
         protected const string dummyApiKey = "q3873hSRPvBKDyT6P2o30M0iHdMZO2sR";
-        protected QueryParameters queryParamObj = new QueryParameters()
+        protected MarsPhotoQueryParameters queryParamObj = new MarsPhotoQueryParameters()
         {
             Rover = MarsRoverEnum.Opportunity,
             Camera = MarsRoverCameraEnum.MAST,
@@ -105,7 +105,7 @@ namespace NasaMarsPhotosDataService.UnitTests.QueryParameters_UnitTests
         [TestMethod]
         public void QueryParameters_ToString_WhenUsingSol_Should_CombineAllParamsAsExpected()
         {
-            queryParamObj = new QueryParameters()
+            queryParamObj = new MarsPhotoQueryParameters()
             {
                 Rover = MarsRoverEnum.Curiousity,
                 Camera = MarsRoverCameraEnum.MARDI,
@@ -120,7 +120,7 @@ namespace NasaMarsPhotosDataService.UnitTests.QueryParameters_UnitTests
         [TestMethod]
         public void QueryParameters_ToString_WhenUsingEarthDate_Should_CombineAllParamsAsExpected()
         {
-            queryParamObj = new QueryParameters()
+            queryParamObj = new MarsPhotoQueryParameters()
             {
                 Rover = MarsRoverEnum.Curiousity,
                 Camera = MarsRoverCameraEnum.MARDI,

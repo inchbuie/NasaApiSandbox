@@ -56,7 +56,7 @@
     <Compile Include="ApiUriBuilder_UnitTests\GetBaseUri_UnitTests.cs" />
     <Compile Include="ConfigurationAccessor_UnitTests\GetAppSettingValue_UnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryParameters_UnitTests\ToStringUnitTests.cs" />
+    <Compile Include="MarsPhotoQueryParameters_UnitTests\ToStringUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

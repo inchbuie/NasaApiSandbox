@@ -9,7 +9,7 @@ namespace NasaMarsPhotos.DataService
     /// <summary>
     /// Class encapsulating the parameters to be passed to the NASA web service
     /// </summary>
-    public class QueryParameters
+    public class MarsPhotoQueryParameters
     {
         public MarsRoverEnum Rover { get; set; }
 

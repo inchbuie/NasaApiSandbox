@@ -1,7 +1,12 @@
-﻿
+﻿@model NasaMarsPhotos.DataService.MarsPhotoQueryParameters
+
 @{
     ViewBag.Title = "Explore the Mars Rovers Photo API";
 }
 
 <h2>Explore</h2>
+
+<div>
+    @Html.Partial("_MarsPhotoQueryParameters", Model)
+</div>
 
