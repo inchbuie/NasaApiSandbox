@@ -15,14 +15,14 @@ namespace NasaMarsPhotos.Web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Information about the NASA Mars Rover Photos API Explorer website";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Information about the creator of the NASA Mars Rover Photos API Explorer website";
 
             return View();
         }
