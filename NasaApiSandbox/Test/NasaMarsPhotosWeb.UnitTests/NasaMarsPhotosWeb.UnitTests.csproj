@@ -58,6 +58,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Services\MarsPhotoQueryViewModelConverter_UnitTests\FromViewModelUnitTests.cs" />
     <Compile Include="Services\NasaMarsRoverPhotoService_UnitTests\NasaMarsRoverPhotoService_CheckEndpointAvailability_UnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
