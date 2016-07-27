@@ -126,10 +126,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\MarsRoverCameraEnum.cs" />
+    <Compile Include="Models\MarsRoverEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\NasaMarsRoverPhotoService.cs" />
-    <Compile Include="Services\MarsPhotoQueryViewModelConverter.cs" />
+    <Compile Include="Services\IMarsPhotoService.cs" />
+    <Compile Include="Services\IWebConfigAccessor.cs" />
+    <Compile Include="Models\MarsPhotoQueryParameters.cs" />
+    <Compile Include="Services\MarsPhotoService.cs" />
+    <Compile Include="Services\WebConfigAccessor.cs" />
+    <Compile Include="ViewModels\MarsRoverCameraViewModel.cs" />
     <Compile Include="ViewModels\MarsRoverPhotosQueryViewModel.cs" />
+    <Compile Include="ViewModels\MarsRoverViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -171,12 +178,10 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\Explore\Index.cshtml" />
-    <Content Include="Views\Shared\_MarsPhotoQueryParameters.cshtml" />
-    <Content Include="Views\Shared\_EnterMarsRoverPhotosQueryParams.cshtml" />
+    <Content Include="Views\Shared\_EnterMarsRoverPhotoQueryParams.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -188,12 +193,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NasaMarsPhotos.DataService\NasaMarsPhotos.DataService.csproj">
-      <Project>{7113bfe9-1dfa-416f-a457-01be180543ae}</Project>
-      <Name>NasaMarsPhotos.DataService</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

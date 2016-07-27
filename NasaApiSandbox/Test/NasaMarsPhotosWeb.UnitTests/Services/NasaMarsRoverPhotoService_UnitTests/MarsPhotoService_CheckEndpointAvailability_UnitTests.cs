@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using NasaMarsPhotos.DataService;
+using NasaMarsPhotos.Web.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 namespace NasaMarsPhotosWeb.UnitTests.Services.NasaMarsRoverPhotoService_UnitTests
 {
     [TestClass]
-    public class NasaMarsRoverPhotoService_CheckEndpointAvailability_UnitTests
+    public class MarsPhotoService_CheckEndpointAvailability_UnitTests
     {
         protected Mock<IMarsPhotoService> mockNasaService = new Mock<IMarsPhotoService>();
 
         [TestMethod]
-        public void NasaMarsRoverPhotoService_CheckEndpointAvailability_Should_ReportStatus_WhenAvailable()
+        public void MarsPhotoService_CheckEndpointAvailability_Should_ReportStatus_WhenAvailable()
         {
             bool isAvailable = true;
             mockNasaService.Setup(s => s.CheckEndpointAvailability()).Returns(isAvailable);
@@ -24,7 +24,7 @@ namespace NasaMarsPhotosWeb.UnitTests.Services.NasaMarsRoverPhotoService_UnitTes
         }
 
         [TestMethod]
-        public void NasaMarsRoverPhotoService_CheckEndpointAvailability_Should_ReportStatus_WhenNotAvailable()
+        public void MarsPhotoService_CheckEndpointAvailability_Should_ReportStatus_WhenNotAvailable()
         {
             bool notAvailable = false;
             mockNasaService.Setup(s => s.CheckEndpointAvailability()).Returns(notAvailable);

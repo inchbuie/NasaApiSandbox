@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NasaMarsPhotos.Web.Models;
 using NasaMarsPhotos.Web.Services;
 using NasaMarsPhotos.Web.ViewModels;
 using System;
@@ -7,43 +8,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NasaMarsPhotosWeb.UnitTests.Services.MarsPhotoQueryViewModelConverter_UnitTests
+namespace NasaMarsPhotosWeb.UnitTests.Services.NasaMarsRoverPhotoService_UnitTests
 {
     [TestClass]
-    public class FromViewModelUnitTests
+    public class MarsPhotoService_FromViewModelUnitTests
     {
         [TestMethod]
-        public void MarsPhotoQueryViewModelConverter_FromViewModel_Should_ConvertRoverProperty()
+        public void MarsPhotoService_FromViewModel_Should_ConvertRoverProperty()
         {
             //Arrange
             const string expectedRover = "Curiosity";
             var viewModel = new MarsRoverPhotosQueryViewModel()
             {
-                Rover = expectedRover
+                SelectedRoverId = (int)MarsRoverEnum.Curiosity
             };
             //Act
-            var converted = MarsPhotoQueryViewModelConverter.FromViewModel(viewModel);
+            var converted = MarsPhotoService.FromViewModel(viewModel);
             //Assert
             Assert.AreEqual(expectedRover, converted.Rover.ToString());
         }
 
         [TestMethod]
-        public void MarsPhotoQueryViewModelConverter_FromViewModel_Should_ConvertCameraProperty()
+        public void MarsPhotoService_FromViewModel_Should_ConvertCameraProperty()
         {
             //Arrange
             const string expectedCamera = "MAST";
             var viewModel = new MarsRoverPhotosQueryViewModel()
             {
-                Camera = expectedCamera
+                SelectedCameraId = (int)MarsRoverCameraEnum.MAST
             };
             //Act
-            var converted = MarsPhotoQueryViewModelConverter.FromViewModel(viewModel);
+            var converted = MarsPhotoService.FromViewModel(viewModel);
             //Assert
             Assert.AreEqual(expectedCamera, converted.Camera.ToString());
         }
 
         [TestMethod]
-        public void MarsPhotoQueryViewModelConverter_FromViewModel_Should_ConvertSolProperty()
+        public void MarsPhotoService_FromViewModel_Should_ConvertSolProperty()
         {
             //Arrange
             const int expectedSol = 101;
@@ -52,7 +53,7 @@ namespace NasaMarsPhotosWeb.UnitTests.Services.MarsPhotoQueryViewModelConverter_
                 MissionSol = expectedSol
             };
             //Act
-            var converted = MarsPhotoQueryViewModelConverter.FromViewModel(viewModel);
+            var converted = MarsPhotoService.FromViewModel(viewModel);
             //Assert
             Assert.AreEqual(expectedSol, converted.MissionSol);
         }

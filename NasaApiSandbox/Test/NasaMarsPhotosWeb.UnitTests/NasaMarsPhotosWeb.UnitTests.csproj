@@ -58,8 +58,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Services\MarsPhotoQueryViewModelConverter_UnitTests\FromViewModelUnitTests.cs" />
-    <Compile Include="Services\NasaMarsRoverPhotoService_UnitTests\NasaMarsRoverPhotoService_CheckEndpointAvailability_UnitTests.cs" />
+    <Compile Include="Services\NasaMarsRoverPhotoService_UnitTests\MarsPhotoService_GetBaseUri_UnitTests.cs" />
+    <Compile Include="Services\NasaMarsRoverPhotoService_UnitTests\MarsPhotoService_GetHostUri_UnitTests.cs" />
+    <Compile Include="Services\ConfigurationAccessor_UnitTests\GetAppSettingValue_UnitTests.cs" />
+    <Compile Include="Services\MarsPhotoQueryParameters_UnitTests\ToStringUnitTests.cs" />
+    <Compile Include="Services\NasaMarsRoverPhotoService_UnitTests\MarsPhotoService_FromViewModelUnitTests.cs" />
+    <Compile Include="Services\NasaMarsRoverPhotoService_UnitTests\MarsPhotoService_CheckEndpointAvailability_UnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -71,10 +75,9 @@
       <Project>{2ede877f-44af-4ed9-8d26-6046efddd7b8}</Project>
       <Name>NasaMarsPhotos.Web</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\NasaMarsPhotos.DataService\NasaMarsPhotos.DataService.csproj">
-      <Project>{7113bfe9-1dfa-416f-a457-01be180543ae}</Project>
-      <Name>NasaMarsPhotos.DataService</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\ApiUriBuilder_UnitTests\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

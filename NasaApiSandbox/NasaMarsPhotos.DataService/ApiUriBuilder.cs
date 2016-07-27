@@ -16,12 +16,14 @@ namespace NasaMarsPhotos.DataService
 
         public string GetHostUri()
         {
+            config = new ConfigurationAccessor();
             var host = config.ApiHost;
             UriBuilder builder = new UriBuilder(secure_scheme, host);
             return builder.ToString();
         }
         public string GetBaseUri()
         {
+            config = new ConfigurationAccessor();
             var host = config.ApiHost;
             UriBuilder builder = new UriBuilder(secure_scheme, host);
             var rootPath = config.ApiBasePath;
