@@ -14,7 +14,7 @@ namespace NasaMarsPhotos.Web.Models
 
         public NasaMarsRoverSelectedCamera Camera { get; set; }
 
-        [Display(Name = "Image (Click to Embiggen)")]
+        [Display(Name = "Image (click to embiggen)")]
         public string Img_Src { get; set; }
 
         public DateTime EarthDate { get; set; }
