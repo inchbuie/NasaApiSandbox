@@ -61,12 +61,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\NasaMarsPhotos.DataService\NasaMarsPhotos.DataService.csproj">
-      <Project>{7113bfe9-1dfa-416f-a457-01be180543ae}</Project>
-      <Name>NasaMarsPhotos.DataService</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
