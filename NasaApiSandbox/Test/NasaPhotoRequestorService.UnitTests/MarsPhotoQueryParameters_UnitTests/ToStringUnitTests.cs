@@ -107,12 +107,12 @@ namespace NasaMarsPhotosDataService.UnitTests.QueryParameters_UnitTests
         {
             queryParamObj = new MarsPhotoQueryParameters()
             {
-                Rover = MarsRoverEnum.Curiousity,
+                Rover = MarsRoverEnum.Curiosity,
                 Camera = MarsRoverCameraEnum.MARDI,
                 ApiKey = dummyApiKey,
                 MissionSol = 634
             };
-            const string expected = "/curiousity/photos?sol=634&camera=mardi&api_key=" + dummyApiKey;
+            const string expected = "/curiosity/photos?sol=634&camera=mardi&api_key=" + dummyApiKey;
             var actual = queryParamObj.ToString();
             Assert.AreEqual(expected, actual);
         }
@@ -122,13 +122,13 @@ namespace NasaMarsPhotosDataService.UnitTests.QueryParameters_UnitTests
         {
             queryParamObj = new MarsPhotoQueryParameters()
             {
-                Rover = MarsRoverEnum.Curiousity,
+                Rover = MarsRoverEnum.Curiosity,
                 Camera = MarsRoverCameraEnum.MARDI,
                 ApiKey = dummyApiKey,
                 EarthDate = new DateTime(2015, 4, 24),
                 Page = 3
             };
-            const string expected = "/curiousity/photos?earth_date=2015-4-24&camera=mardi&page=3&api_key=" + dummyApiKey;
+            const string expected = "/curiosity/photos?earth_date=2015-4-24&camera=mardi&page=3&api_key=" + dummyApiKey;
             var actual = queryParamObj.ToString();
             Assert.AreEqual(expected, actual);
         }

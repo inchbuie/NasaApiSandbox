@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Threading.Tasks;
 
 namespace NasaMarsPhotos.Web.Services
 {
@@ -32,6 +33,11 @@ namespace NasaMarsPhotos.Web.Services
         public bool CheckEndpointAvailability()
         {
             return apiService.CheckEndpointAvailability();
-        }        
+        }
+
+        public Task<string> GetFirstPhoto(MarsPhotoQueryParameters queryParams)
+        {
+            return apiService.GetFirstPhoto(queryParams);
+        }
     }
 }

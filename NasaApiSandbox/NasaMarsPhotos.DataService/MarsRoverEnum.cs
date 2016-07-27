@@ -9,7 +9,7 @@ namespace NasaMarsPhotos.DataService
     public enum MarsRoverEnum
     {
         Unspecified,
-        Curiousity,
+        Curiosity,
         Opportunity,
         Spirit
     }

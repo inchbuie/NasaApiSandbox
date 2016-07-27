@@ -20,5 +20,16 @@ namespace NasaMarsPhotos.Web.Controllers
             queryParams.ApiKey = "1234";
             return View(queryParams);
         }
+
+        [HttpGet]
+        public ActionResult Load(MarsPhotoQueryParameters queryParams)
+        {
+            //temp hard-code some stuff to test
+            queryParams.Rover = MarsRoverEnum.Curiosity;
+            queryParams.Camera = MarsRoverCameraEnum.FHAZ;
+
+            var apiData = nasaService.GetFirstPhoto(queryParams);
+            return View(apiData);
+        }
     }
 }

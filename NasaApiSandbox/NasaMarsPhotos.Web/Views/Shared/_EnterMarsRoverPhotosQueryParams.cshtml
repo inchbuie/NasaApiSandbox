@@ -1,8 +1,8 @@
 ﻿@model NasaMarsPhotos.Web.ViewModels.MarsRoverPhotosQueryViewModel
 
 
-@using (Html.BeginForm())
-{
+ @using (Html.BeginForm("Load", "Explore", FormMethod.Get, null))
+ {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
@@ -51,7 +51,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Load Photos" class="btn btn-default" />
             </div>
         </div>
     </div>
