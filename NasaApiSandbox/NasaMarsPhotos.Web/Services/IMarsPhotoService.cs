@@ -1,4 +1,6 @@
 ﻿using NasaMarsPhotos.Web.Models;
+using NasaMarsPhotos.Web.ViewModels;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace NasaMarsPhotos.Web.Services
@@ -6,6 +8,8 @@ namespace NasaMarsPhotos.Web.Services
     public interface IMarsPhotoService
     {
         bool CheckEndpointAvailability();
-        Task<string> GetFirstPhoto(MarsPhotoQueryParameters queryParams);
+        Task<IEnumerable<NasaMarsRoverPhoto>> GetPhotos(MarsPhotoQueryParameters queryParams);
+        MarsPhotoQueryParameters FromViewModel(MarsRoverPhotosQueryViewModel viewModel);
+        MarsRoverPhotosQueryViewModel ToViewModel(MarsPhotoQueryParameters queryObj);
     }
 }

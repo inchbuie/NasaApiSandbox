@@ -121,13 +121,19 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\PhotosController.cs" />
     <Compile Include="Controllers\ExploreController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\NasaMarsRoverAvailableCamera.cs" />
+    <Compile Include="Models\NasaMarsRoverSelectedCamera.cs" />
     <Compile Include="Models\MarsRoverCameraEnum.cs" />
     <Compile Include="Models\MarsRoverEnum.cs" />
+    <Compile Include="Models\NasaMarsRoverPhoto.cs" />
+    <Compile Include="Models\NasaMarsRoverPhotoCollection.cs" />
+    <Compile Include="Models\NasaMarsRover.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IMarsPhotoService.cs" />
     <Compile Include="Services\IWebConfigAccessor.cs" />
@@ -179,6 +185,7 @@
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\Explore\Index.cshtml" />
     <Content Include="Views\Shared\_EnterMarsRoverPhotoQueryParams.cshtml" />
+    <Content Include="Views\Photos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

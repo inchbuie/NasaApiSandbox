@@ -11,6 +11,8 @@ namespace NasaMarsPhotos.Web.Models
     /// </summary>
     public class MarsPhotoQueryParameters
     {
+        public string RootPath { get; set; }
+
         public MarsRoverEnum Rover { get; set; }
 
         public MarsRoverCameraEnum Camera { get; set; }
@@ -26,6 +28,11 @@ namespace NasaMarsPhotos.Web.Models
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
+            if (!String.IsNullOrWhiteSpace(RootPath))
+            {
+                sb.Append('/');
+                sb.Append(RootPath);
+            }
             sb.Append('/');
             sb.Append(this.Rover.ToString().ToLower());
             sb.Append("/photos?");

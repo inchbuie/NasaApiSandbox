@@ -12,12 +12,15 @@ namespace NasaMarsPhotosWeb.UnitTests.Services.QueryParameters_UnitTests
     public class MarsPhotoQueryParameters_ToStringUnitTests
     {
         protected const string dummyApiKey = "q3873hSRPvBKDyT6P2o30M0iHdMZO2sR";
+        protected const string dummyBasePath = "mars-photos/api/v1/rovers";
+
         protected MarsPhotoQueryParameters queryParamObj = new MarsPhotoQueryParameters()
         {
             Rover = MarsRoverEnum.Opportunity,
             Camera = MarsRoverCameraEnum.MAST,
             ApiKey = dummyApiKey,
-            MissionSol = 505
+            MissionSol = 505,
+            RootPath = dummyBasePath
         };
 
         [TestMethod]
@@ -110,9 +113,10 @@ namespace NasaMarsPhotosWeb.UnitTests.Services.QueryParameters_UnitTests
                 Rover = MarsRoverEnum.Curiosity,
                 Camera = MarsRoverCameraEnum.MARDI,
                 ApiKey = dummyApiKey,
-                MissionSol = 634
+                MissionSol = 634,
+                RootPath = dummyBasePath
             };
-            const string expected = "/curiosity/photos?sol=634&camera=mardi&api_key=" + dummyApiKey;
+            const string expected = "/mars-photos/api/v1/rovers/curiosity/photos?sol=634&camera=mardi&api_key=" + dummyApiKey;
             var actual = queryParamObj.ToString();
             Assert.AreEqual(expected, actual);
         }
@@ -126,9 +130,10 @@ namespace NasaMarsPhotosWeb.UnitTests.Services.QueryParameters_UnitTests
                 Camera = MarsRoverCameraEnum.MARDI,
                 ApiKey = dummyApiKey,
                 EarthDate = new DateTime(2015, 4, 24),
+                RootPath = dummyBasePath,
                 Page = 3
             };
-            const string expected = "/curiosity/photos?earth_date=2015-4-24&camera=mardi&page=3&api_key=" + dummyApiKey;
+            const string expected = "/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2015-4-24&camera=mardi&page=3&api_key=" + dummyApiKey;
             var actual = queryParamObj.ToString();
             Assert.AreEqual(expected, actual);
         }

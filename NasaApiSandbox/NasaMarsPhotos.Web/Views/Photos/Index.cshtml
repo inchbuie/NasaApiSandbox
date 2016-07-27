@@ -1,0 +1,48 @@
+﻿@model IEnumerable<NasaMarsPhotos.Web.Models.NasaMarsRoverPhoto>
+
+@{
+    ViewBag.Title = "View Selected Photos from the Mars Rovers Photo API";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Rover.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Camera.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sol)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Img_Src)
+        </th>
+    </tr>
+
+    @foreach (var photo in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => photo.Rover.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => photo.Camera.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => photo.Sol)
+            </td>
+            <td>
+                <img src="@Url.Content(photo.Img_Src)" alt="@photo.Img_Src" style="width: 25%; height: 25%" onclick="window.open(this.src)"/>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<p>
+    @Html.ActionLink("Return to Request Page", "Index", "Explore", null, new { @class = "btn btn-primary btn-lg" })
+</p>
+

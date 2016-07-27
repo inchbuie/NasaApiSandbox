@@ -22,8 +22,9 @@ namespace NasaMarsPhotosWeb.UnitTests.Services.NasaMarsRoverPhotoService_UnitTes
             {
                 SelectedRoverId = (int)MarsRoverEnum.Curiosity
             };
+            var photoService = new MarsPhotoService();
             //Act
-            var converted = MarsPhotoService.FromViewModel(viewModel);
+            var converted = photoService.FromViewModel(viewModel);
             //Assert
             Assert.AreEqual(expectedRover, converted.Rover.ToString());
         }
@@ -37,8 +38,9 @@ namespace NasaMarsPhotosWeb.UnitTests.Services.NasaMarsRoverPhotoService_UnitTes
             {
                 SelectedCameraId = (int)MarsRoverCameraEnum.MAST
             };
+            var photoService = new MarsPhotoService();
             //Act
-            var converted = MarsPhotoService.FromViewModel(viewModel);
+            var converted = photoService.FromViewModel(viewModel);
             //Assert
             Assert.AreEqual(expectedCamera, converted.Camera.ToString());
         }
@@ -52,8 +54,9 @@ namespace NasaMarsPhotosWeb.UnitTests.Services.NasaMarsRoverPhotoService_UnitTes
             {
                 MissionSol = expectedSol
             };
+            var photoService = new MarsPhotoService();
             //Act
-            var converted = MarsPhotoService.FromViewModel(viewModel);
+            var converted = photoService.FromViewModel(viewModel);
             //Assert
             Assert.AreEqual(expectedSol, converted.MissionSol);
         }

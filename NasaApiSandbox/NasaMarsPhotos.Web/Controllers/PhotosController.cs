@@ -9,27 +9,27 @@ using System.Web.Mvc;
 
 namespace NasaMarsPhotos.Web.Controllers
 {
-    public class ExploreController : Controller
+    public class PhotosController : Controller
     {
         protected IMarsPhotoService nasaService = null;
 
-        public ExploreController()
+        public PhotosController()
         {
             if (null == nasaService)
             {
                 nasaService = new MarsPhotoService();
             }
         }
-        public ExploreController(IMarsPhotoService marsPhotoService) : this()
+        public PhotosController(IMarsPhotoService marsPhotoService) : this()
         {
             nasaService = marsPhotoService;
         }
-
-        // GET: Explore
-        public ActionResult Index()
+        
+        public async Task<ActionResult> Index(MarsRoverPhotosQueryViewModel queryParams)
         {
-            var queryParams = new MarsRoverPhotosQueryViewModel();
-            return View(queryParams);
+            var queryObj = nasaService.FromViewModel(queryParams);
+            var apiData = await nasaService.GetPhotos(queryObj);
+            return View(apiData);
         }
     }
 }

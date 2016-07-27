@@ -1,9 +1,11 @@
 ﻿using NasaMarsPhotos.Web.Models;
 using NasaMarsPhotos.Web.ViewModels;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,6 +22,7 @@ namespace NasaMarsPhotos.Web.Services
         protected const string defaultRootPath = "";
         protected const string secure_scheme = "https";
         protected const string appSettingName_ApiKey = "ApiKey";
+        protected const string defaultApiKey = "DEMO_KEY";
 
         protected IWebConfigAccessor configAccessor = null;
         
@@ -44,36 +47,31 @@ namespace NasaMarsPhotos.Web.Services
         {
             return false;
         }
-
-        /// <summary>
-        /// Retrieves a photo from the API service.
-        /// Only the first photo of any which match the query parameters
-        ///   will be returned.
-        /// </summary>
-        /// <param name="queryParams"></param>
-        /// <returns></returns>
-        public async Task<string> GetFirstPhoto(MarsPhotoQueryParameters queryParams)
+        
+        public async Task<IEnumerable<NasaMarsRoverPhoto>> GetPhotos(MarsPhotoQueryParameters queryParams)
         {
             var apiBaseAddress = GetBaseUri();
             var queryArgs = queryParams.ToString();
-            string result = null;
 
             using (var httpClient = new HttpClient())
             {
                 httpClient.BaseAddress = new Uri(apiBaseAddress);
                 //client.DefaultRequestHeaders.Accept.Clear();
-                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 var response = await httpClient.GetAsync(queryArgs);
+                response.EnsureSuccessStatusCode();
                 if (response.IsSuccessStatusCode)
                 {
-                    result = await response.Content.ReadAsStringAsync(); 
-                }            
+                    var jsonString = await response.Content.ReadAsStringAsync();
+                    var data = JsonConvert.DeserializeObject<NasaMarsRoverPhotoCollection>(jsonString);
+                    return data.Photos;
+                }
             }
-            return result;
+            return null;
         }
 
-        public static MarsPhotoQueryParameters FromViewModel(MarsRoverPhotosQueryViewModel viewModel)
+        public MarsPhotoQueryParameters FromViewModel(MarsRoverPhotosQueryViewModel viewModel)
         {
             var queryObj = new MarsPhotoQueryParameters();
             if (Enum.IsDefined(typeof(MarsRoverEnum), viewModel.SelectedRoverId))
@@ -87,10 +85,15 @@ namespace NasaMarsPhotos.Web.Services
             queryObj.MissionSol = viewModel.MissionSol;
             queryObj.EarthDate = viewModel.EarthDate;
             queryObj.Page = viewModel.Page;
+
+            var apiKey = configAccessor.ReadAppSettingsValue(appSettingName_ApiKey);
+            queryObj.ApiKey = apiKey;
+            var rootPath = configAccessor.ReadAppSettingsValue(appSettingName_ApiBasePath);
+            queryObj.RootPath = rootPath;
             return queryObj;
         }
 
-        public static MarsRoverPhotosQueryViewModel ToViewModel(MarsPhotoQueryParameters queryObj)
+        public MarsRoverPhotosQueryViewModel ToViewModel(MarsPhotoQueryParameters queryObj)
         {
             var viewModel = new MarsRoverPhotosQueryViewModel();
             viewModel.SelectedRoverId = (int)queryObj.Rover;
