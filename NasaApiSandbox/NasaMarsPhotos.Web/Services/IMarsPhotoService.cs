@@ -7,9 +7,9 @@ namespace NasaMarsPhotos.Web.Services
 {
     public interface IMarsPhotoService
     {
-        bool CheckEndpointAvailability();
         Task<IEnumerable<NasaMarsRoverPhoto>> GetPhotos(MarsPhotoQueryParameters queryParams);
         MarsPhotoQueryParameters FromViewModel(MarsRoverPhotosQueryViewModel viewModel);
         MarsRoverPhotosQueryViewModel ToViewModel(MarsPhotoQueryParameters queryObj);
+        IEnumerable<MarsRoverCameraViewModel> GetValidCameraForRover(int roverId);
     }
 }

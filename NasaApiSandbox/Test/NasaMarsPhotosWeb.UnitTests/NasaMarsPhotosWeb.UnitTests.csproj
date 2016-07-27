@@ -58,12 +58,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Services\NasaMarsRoverPhotoService_UnitTests\MarsPhotoService_GetPhotos_UnitTests.cs" />
     <Compile Include="Services\NasaMarsRoverPhotoService_UnitTests\MarsPhotoService_GetBaseUri_UnitTests.cs" />
     <Compile Include="Services\NasaMarsRoverPhotoService_UnitTests\MarsPhotoService_GetHostUri_UnitTests.cs" />
     <Compile Include="Services\ConfigurationAccessor_UnitTests\GetAppSettingValue_UnitTests.cs" />
     <Compile Include="Services\MarsPhotoQueryParameters_UnitTests\ToStringUnitTests.cs" />
     <Compile Include="Services\NasaMarsRoverPhotoService_UnitTests\MarsPhotoService_FromViewModelUnitTests.cs" />
-    <Compile Include="Services\NasaMarsRoverPhotoService_UnitTests\MarsPhotoService_CheckEndpointAvailability_UnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

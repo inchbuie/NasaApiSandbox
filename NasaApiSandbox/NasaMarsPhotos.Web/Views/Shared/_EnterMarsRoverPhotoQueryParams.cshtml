@@ -65,3 +65,31 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            //Dropdownlist Selectedchange event
+            $("#SelectedRoverId").change(function () {
+                $("#SelectedCameraId").empty();
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("GetCameraChoicesForRover")',
+                    dataType: 'json',
+                    data: { roverSelectValue: $("#SelectedRoverId").val() },
+
+                    success: function (cams) {
+                        $.each(cams, function (i, cam) {
+                            $("#SelectedCameraId")
+                                .append('<option value="' + cam.Value + '">' + cam.Text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        //TODO real error handling
+                        alert('Failed to retrieve camera options: ' + ex.name + " " + ex.message);
+                    }
+                });
+                return false;
+            });
+        });
+    </script>

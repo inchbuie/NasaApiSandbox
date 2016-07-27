@@ -29,7 +29,18 @@ namespace NasaMarsPhotos.Web.Controllers
         public ActionResult Index()
         {
             var queryParams = new MarsRoverPhotosQueryViewModel();
+            var initialCameraChoices = nasaService.GetValidCameraForRover(queryParams.SelectedRoverId);
+            queryParams.CameraChoices = new SelectList(initialCameraChoices, "Id", "Name");
             return View(queryParams);
+        }
+
+        [HttpGet]
+        public JsonResult GetCameraChoicesForRover(string roverSelectValue)
+        {
+            int roverId = int.Parse(roverSelectValue);
+            var validCamsForRover = nasaService.GetValidCameraForRover(roverId);
+            var selectList = new SelectList(validCamsForRover, "Id", "Name");
+            return Json(selectList, JsonRequestBehavior.AllowGet);
         }
     }
 }

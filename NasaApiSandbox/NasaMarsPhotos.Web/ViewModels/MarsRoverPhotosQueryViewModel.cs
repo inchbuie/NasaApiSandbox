@@ -10,12 +10,14 @@ namespace NasaMarsPhotos.Web.ViewModels
 {
     public class MarsRoverPhotosQueryViewModel
     {
-        private readonly List<MarsRoverViewModel> _roverChoices = new List<MarsRoverViewModel>();
-        private readonly List<MarsRoverCameraViewModel> _cameraChoices = new List<MarsRoverCameraViewModel>();
+        private List<MarsRoverViewModel> _roverChoices = new List<MarsRoverViewModel>();
+        private List<MarsRoverCameraViewModel> _cameraChoices = new List<MarsRoverCameraViewModel>();
 
         public MarsRoverPhotosQueryViewModel()
         {
-            PopulateDropDownLists();
+            PopulateRoverDropDownList();
+            this.SelectedRoverId = (int)MarsRoverEnum.Curiosity;
+            PopulateRoverCamDropDownList();
 
             //populate some default values
             Page = 1;
@@ -50,16 +52,26 @@ namespace NasaMarsPhotos.Web.ViewModels
                 var selectList = new SelectList(_cameraChoices, "Id", "Name");
                 return selectList;
             }
+            set
+            {
+                _cameraChoices = value
+                    .Select(x => new MarsRoverCameraViewModel(int.Parse(x.Value), x.Text))
+                    .ToList();
+            }
         }
-        protected void PopulateDropDownLists()
+
+        protected void PopulateRoverDropDownList()
         {
             foreach (var rover in Enum.GetValues(typeof(MarsRoverEnum)))
             {
                 _roverChoices.Add(new MarsRoverViewModel((int)rover, rover.ToString()));
             }
-            foreach (var cam in Enum.GetValues(typeof(MarsRoverCameraEnum)))
+        }
+        protected void PopulateRoverCamDropDownList()
+        {
+            foreach (var roverCam in Enum.GetValues(typeof(MarsRoverCameraEnum)))
             {
-                _cameraChoices.Add(new MarsRoverCameraViewModel((int)cam, cam.ToString()));
+                _cameraChoices.Add(new MarsRoverCameraViewModel((int)roverCam, roverCam.ToString()));
             }
         }
     }

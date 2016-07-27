@@ -37,17 +37,7 @@ namespace NasaMarsPhotos.Web.Services
         {
             configAccessor = config;
         }
-
-        /// <summary>
-        /// Attempts to ping (verify the ability to make a connection with)
-        ///  the target endpoint
-        /// </summary>
-        /// <returns></returns>
-        public bool CheckEndpointAvailability()
-        {
-            return false;
-        }
-        
+                
         public async Task<IEnumerable<NasaMarsRoverPhoto>> GetPhotos(MarsPhotoQueryParameters queryParams)
         {
             var apiBaseAddress = GetBaseUri();
@@ -56,7 +46,6 @@ namespace NasaMarsPhotos.Web.Services
             using (var httpClient = new HttpClient())
             {
                 httpClient.BaseAddress = new Uri(apiBaseAddress);
-                //client.DefaultRequestHeaders.Accept.Clear();
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 var response = await httpClient.GetAsync(queryArgs);
@@ -124,6 +113,50 @@ namespace NasaMarsPhotos.Web.Services
             var rootPath = configAccessor.ReadAppSettingsValue(appSettingName_ApiBasePath, defaultRootPath);
             builder.Path = rootPath;
             return builder.ToString();
+        }
+
+        public IEnumerable<MarsRoverCameraViewModel> GetValidCameraForRover(int roverId)
+        {
+            var rover = (MarsRoverEnum)roverId;
+            var allCameraChoices = Enum.GetValues(typeof(MarsRoverCameraEnum)).Cast<MarsRoverCameraEnum>();
+            var validCameraChoices = new List<MarsRoverCameraViewModel>();
+
+            switch (rover)
+            {
+                case MarsRoverEnum.Curiosity:
+                    foreach (var cam in allCameraChoices)
+                    {
+                        //this rover doesn't have these cameras
+                        if (cam != MarsRoverCameraEnum.PANCAM &&
+                            cam != MarsRoverCameraEnum.MINITES)
+                        {
+                            validCameraChoices.Add(new MarsRoverCameraViewModel((int)cam, cam.ToString()));
+                        }
+                    }
+                    break;
+                case MarsRoverEnum.Opportunity:
+                case MarsRoverEnum.Spirit:
+                    foreach (var cam in allCameraChoices)
+                    {
+                        //these rovers don't have these cameras
+                        if (cam != MarsRoverCameraEnum.MAST &&
+                            cam != MarsRoverCameraEnum.CHEMCAM &&
+                            cam != MarsRoverCameraEnum.MAHLI &&
+                            cam != MarsRoverCameraEnum.MARDI)
+                        {
+                            validCameraChoices.Add(new MarsRoverCameraViewModel((int)cam, cam.ToString()));
+                        }
+                    }
+                    break;
+                case MarsRoverEnum.Unspecified:
+                default:
+                    foreach (var cam in allCameraChoices)
+                    {
+                        validCameraChoices.Add(new MarsRoverCameraViewModel((int)cam, cam.ToString()));
+                    }
+                    break;
+            }
+            return validCameraChoices;
         }
     }
 }
