@@ -14,13 +14,20 @@ namespace NasaMarsPhotosWeb.UnitTests.Services.NasaMarsRoverPhotoService_UnitTes
     public class MarsPhotoService_GetPhotos_UnitTests
     {
         [TestMethod]
-        public void MarsPhotoService_GetPhotos_Should_Do_x()
+        public async Task MarsPhotoService_GetPhotos_Should_Do_QUickUnitTestProofOfConcept()
         {
-            var nasaService = new MarsPhotoService();
+            var expectedPhotoResults = new List<NasaMarsRoverPhoto>();
+            var expectedCollection = new NasaMarsRoverPhotoCollection();
+            expectedCollection.Photos = expectedPhotoResults;
+            var mockConfigReader = new Mock<IWebConfigAccessor>();
+            var mockHttpClient = new Mock<IMiniHttpClient>();
+            mockHttpClient.Setup(x => x.MakeRequestGetJsonData<NasaMarsRoverPhotoCollection>(It.IsAny<string>()))
+                .ReturnsAsync(expectedCollection);
+            var photoService = new MarsPhotoService(mockConfigReader.Object, mockHttpClient.Object);
+            
             var queryParams = new MarsPhotoQueryParameters();
-            var result = nasaService.GetPhotos(queryParams);
-            throw new NotImplementedException();
-            Assert.AreEqual(isAvailable, result);
+            var actualPhotoResults = await photoService.GetPhotos(queryParams);
+            Assert.AreEqual(expectedPhotoResults, actualPhotoResults);
         }
     }
 }

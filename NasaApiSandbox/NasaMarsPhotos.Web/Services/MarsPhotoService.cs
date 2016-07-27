@@ -25,38 +25,35 @@ namespace NasaMarsPhotos.Web.Services
         protected const string defaultApiKey = "DEMO_KEY";
 
         protected IWebConfigAccessor configAccessor = null;
-        
+        protected IMiniHttpClient httpClient = null;
+
         public MarsPhotoService()
         {
             if (null == configAccessor)
             {
                 configAccessor = new WebConfigAccessor();
             }
+            if (null == httpClient)
+            {
+                var apiBaseAddress = GetBaseUri();
+                httpClient = new MiniHttpClient(apiBaseAddress);
+            }
         }
-        public MarsPhotoService(IWebConfigAccessor config) : this()
+        public MarsPhotoService(IWebConfigAccessor config, IMiniHttpClient miniHttpClient)
+            : this()
         {
             configAccessor = config;
+            httpClient = miniHttpClient;
         }
                 
         public async Task<IEnumerable<NasaMarsRoverPhoto>> GetPhotos(MarsPhotoQueryParameters queryParams)
         {
-            var apiBaseAddress = GetBaseUri();
             var queryArgs = queryParams.ToString();
-
-            using (var httpClient = new HttpClient())
+            var data = await httpClient.MakeRequestGetJsonData<NasaMarsRoverPhotoCollection>(queryArgs);
+            if (null != data)
             {
-                httpClient.BaseAddress = new Uri(apiBaseAddress);
-                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                var response = await httpClient.GetAsync(queryArgs);
-                response.EnsureSuccessStatusCode();
-                if (response.IsSuccessStatusCode)
-                {
-                    var jsonString = await response.Content.ReadAsStringAsync();
-                    var data = JsonConvert.DeserializeObject<NasaMarsRoverPhotoCollection>(jsonString);
-                    return data.Photos;
-                }
-            }
+                return data.Photos;
+            }            
             return null;
         }
 
